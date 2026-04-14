@@ -10,8 +10,12 @@ struct Beam {
     float stiffness;
     float damping;
 
+    bool isBroken;
+    float plasticDeflectionThreshold;
+    float breakLimit;
+
     Beam(Node* node1, Node* node2, float k, float d);
-    void Update(float dt);
+    void Update(float dt, bool simulateDeflection);
     void Draw();
 };
 
