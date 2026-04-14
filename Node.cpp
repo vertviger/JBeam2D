@@ -13,7 +13,7 @@ Node::Node(Vector2 pos, float mass, float radius)
 void Node::Update(float dt, Vector2 screenSize)
 {
     // 1. Define Gravity (e.g., 981 pixels/s^2)
-    Vector2 gravity = { 0, 981.0f };
+    Vector2 gravity = { 0, 0 };
 
     // 2. Acceleration = Force / Mass (Newton's 2nd Law)
     // For now, let's just use gravity as our acceleration
@@ -23,27 +23,36 @@ void Node::Update(float dt, Vector2 screenSize)
     velocity.x += acceleration.x * dt;
     velocity.y += acceleration.y * dt;
 
+    float damping = this->mass / 10000;
+
+    velocity.x -= velocity.x * damping;
+    velocity.y -= velocity.y * damping;
+
     // 4. Position = Position + (Velocity * Time)
     position.x += velocity.x * dt;
     position.y += velocity.y * dt;
 
     // 5. Simple Floor Collision (so it doesn't fall forever)
-    if (position.y > screenSize.y) {
+    if (position.y > screenSize.y) 
+    {
         position.y = screenSize.y;
         velocity.y *= -0.7f; // Bounce with 50% energy loss
     }
 
-    if (position.x > screenSize.x) {
+    if (position.x > screenSize.x) 
+    {
         position.x = screenSize.x;
         velocity.x *= -0.7f; // Bounce with 50% energy loss
     }
 
-    if (position.y < 0) {
+    if (position.y < 0) 
+    {
         position.y = 0;
         velocity.y *= -0.7f; // Bounce with 50% energy loss
     }
 
-    if (position.x < 0) {
+    if (position.x < 0) 
+    {
         position.x = 0;
         velocity.x *= -0.7f; // Bounce with 50% energy loss
     }

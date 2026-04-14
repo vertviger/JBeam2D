@@ -12,7 +12,7 @@ FetchContent_MakeAvailable(raylib)
 
 # 2. Add your source code
 # Make sure the filename matches your .cpp exactly!
-add_executable(JBeamSim JBeam2D.cpp "Node.h" "Node.cpp")
+add_executable(JBeamSim JBeam2D.cpp "Node.h" "Node.cpp" "Beam.h" "Beam.cpp")
 
 # 3. Link the libraries
 target_link_libraries(JBeamSim raylib)

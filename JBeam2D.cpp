@@ -1,10 +1,11 @@
 #include "raylib.h"
 #include "Node.h"
+#include "Beam.h"
 #include <vector>
 
 int main() {
-    const int screenWidth = 1920;
-    const int screenHeight = 1080;
+    const int screenWidth = 960;
+    const int screenHeight = 720;
 
     InitWindow(screenWidth, screenHeight, "BeamNG Physics Lab");
 
@@ -16,15 +17,18 @@ int main() {
     float radius = 20;
     
 
-    Node first = Node({ screenWidth / 2, screenHeight / 2 }, 1, radius);
+    Node first = Node({ screenWidth / 2, screenHeight / 2 }, 10, radius);
 
     std::vector<Node> nodes;
     nodes.push_back(first);
-    nodes.push_back(Node({ 500.0f, 300.0f }, 1.0f, radius));
-    nodes.push_back(Node({ 700.0f, 300.0f }, 1.0f, radius));
-    nodes.push_back(Node({ 500.0f, 500.0f }, 1.0f, radius));
-    nodes.push_back(Node({ 700.0f, 500.0f }, 1.0f, radius));
+    nodes.push_back(Node({ 500.0f, 300.0f }, 10.0f, radius));
+    nodes.push_back(Node({ 700.0f, 300.0f }, 10.0f, radius));
+    nodes.push_back(Node({ 500.0f, 500.0f }, 10.0f, radius));
+    nodes.push_back(Node({ 700.0f, 500.0f }, 10.0f, radius));
 
+    std::vector<Beam> beams;
+    //TODO: add Beams between all possible nodes. 
+    
     SetTargetFPS(60);
     while (!WindowShouldClose()) 
     {
@@ -78,7 +82,7 @@ int main() {
                 n.Update(physicsTimeStep, { screenWidth, screenHeight });
             }
             totalCalculations += 20; // Example: 20 ops per beam
-
+            //TODO: update Beams positions 
             accumulator -= physicsTimeStep;
         }
 
@@ -91,7 +95,7 @@ int main() {
         {
             n.Draw();
         }
-        
+        //TODO: draw Beams
         EndDrawing();
     }
 
