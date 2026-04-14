@@ -2,19 +2,39 @@
 #include "Node.h"
 #include "Beam.h"
 #include <vector>
+#include <string>
+#include <chrono>
 
-int main() {
+std::string FormatWithDots(long value)
+{
+    std::string numWithDots = std::to_string(value);
+    int insertPosition = numWithDots.length() - 3;
+
+    while (insertPosition > 0)
+    {
+        numWithDots.insert(insertPosition, ".");
+        insertPosition -= 3;
+    }
+
+    return numWithDots;
+}
+
+int main() 
+{
+    
+    
     int screenWidth = 1280;
     int screenHeight = 720;
     
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-    InitWindow(screenWidth, screenHeight, "BeamNG Physics Lab");
+    InitWindow(screenWidth, screenHeight, "BeamNG JBeam2D Simulation");
+    Font monoFont = LoadFontEx("resources/fonts/jetbrains_mono.ttf", 80, 0, 250);
     // Simulation settings
     float physicsTimeStep = 0.0005f; // 0.5ms (2000Hz)
     float accumulator = 0.0f;
     long totalCalculations = 0;
     //Nodes
-    float radius = 20;
+    float radius = 25;
     float mass = 10;
     bool showNodeLabel = false;
     //Beams
@@ -40,9 +60,8 @@ int main() {
     beams.push_back(Beam(&nodes[1], &nodes[4], stiffness, damping));
     beams.push_back(Beam(&nodes[2], &nodes[3], stiffness, damping));
 
+    auto start = std::chrono::high_resolution_clock::now();
 
-    //TODO: add Beams between all possible nodes. 
-    
     SetTargetFPS(60);
     while (!WindowShouldClose()) 
     {
@@ -95,9 +114,8 @@ int main() {
         
         float deltaTime = GetFrameTime();
         accumulator += deltaTime;
-
-        // The "BeamNG" Heartbeat: Run the physics at 2000Hz 
-        // regardless of the frame rate.
+        
+        // --- PHYSICS UPDATES ---
         while (accumulator >= physicsTimeStep) 
         {
             for (auto& b : beams)
@@ -108,16 +126,18 @@ int main() {
             {
                 n.Update(physicsTimeStep, { (float)screenWidth, (float)screenHeight });
             }
-            totalCalculations += beams.size()*21; // Example: 20 ops per beam
-            totalCalculations += nodes.size() * 21; // Example: 20 ops per beam
+            totalCalculations += beams.size()*37; // got 37 calculations there, check out Beam.cpp
+            totalCalculations += nodes.size() * 13; // got 13 calculations from the Node.cpp
             accumulator -= physicsTimeStep;
         }
 
         // --- DRAWING ---
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        DrawText(TextFormat("Calculations: %ld", totalCalculations), 20, 20, 20, DARKGRAY);
-        
+        DrawText(TextFormat("Calculations: %s", FormatWithDots(totalCalculations).c_str()), 20, 20, 80, DARKGRAY);
+        std::chrono::duration<float> elapsed = std::chrono::high_resolution_clock::now() - start;
+        DrawText(TextFormat("Time: %.2fs", elapsed.count()),screenWidth*0.82, 0.95*screenHeight, 40, DARKGRAY);
+
         for (auto& b : beams)
         {
             b.Draw();
