@@ -3,7 +3,8 @@
 # Jbeam2D
 
 **Created specifically to see how many calculations BeamNG performs each game loop iteration, which in term runs at 2000hz**
-Represents very primitive version of Jbeam which BeamNG soft body physics runs on 
-In 2D it has springs physics and damping physics for Beams and mass parameter for Nodes
-Each parameter of Beams and Nodes can be customized according to users needs
+
+Represents very primitive version of Jbeam which BeamNG soft body physics runs on. 
+In 2D it has springs physics and damping physics for Beams and mass parameter for Nodes.
+Each parameter of Beams and Nodes can be customized according to users needs.
 2D simulation also runs 2000 times a second, just as its inspiration, BeamNG.drive :)
