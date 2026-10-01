@@ -11,6 +11,6 @@ Each parameter of Beams and Nodes can be customized according to users needs.
 
 ### Specification
 
-**Language**: C++17
-**Build**: Cmake
-**Libraries**: Raylib
+* **Language**: C++17
+* **Build**: Cmake
+* **Libraries**: Raylib
