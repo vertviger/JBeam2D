@@ -8,3 +8,8 @@ Represents very primitive version of Jbeam which BeamNG soft body physics runs o
 In 2D it has springs physics and damping physics for Beams and mass parameter for Nodes.
 Each parameter of Beams and Nodes can be customized according to users needs.
 2D simulation also runs 2000 times a second, just as its inspiration, BeamNG.drive :)
+
+### Specification
+**Language**: C++17 
+**Build**: Cmake
+**Libraries**: Raylib
