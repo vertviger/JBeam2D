@@ -29,7 +29,6 @@ void Node::Update(float dt, Vector2 screenSize)
     position.x += velocity.x * dt;
     position.y += velocity.y * dt;
 
-    // Floor Collision (so it doesn't fall forever)
     if (position.y > screenSize.y) 
     {
         position.y = screenSize.y;

@@ -4,7 +4,7 @@
 #include "Node.h"
 
 struct Beam {
-    Node* n1; // Use pointers (Node*) to refer to the original nodes
+    Node* n1; // Use pointers to refer to the original nodes
     Node* n2;
     float restLength;
     float stiffness;

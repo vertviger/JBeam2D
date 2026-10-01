@@ -6,7 +6,6 @@ Beam::Beam(Node* node1, Node* node2, float k, float d) {
     this->n2 = node2;
     this->stiffness = k;
     this->damping = d;
-    // Calculate the distance they started at as the 'natural' length
     this->restLength = Vector2Distance(n1->position, n2->position);
     this->isBroken = false;
     this->plasticDeflectionThreshold = 0.5f;

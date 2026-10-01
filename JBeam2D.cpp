@@ -39,7 +39,7 @@ int main()
     bool showNodeLabel = false;
     //Beams
     float stiffness = 1000.0f;
-    float damping = 50.0f;
+    float damping = 10.0f;
     bool simulateDeflection = false;
 
     Node first = Node({ (float)screenWidth / 2, (float)screenHeight / 2 }, mass, radius);
@@ -115,7 +115,7 @@ int main()
         float deltaTime = GetFrameTime();
         accumulator += deltaTime;
         
-        // --- PHYSICS UPDATES ---
+        // physics
         while (accumulator >= physicsTimeStep) 
         {
             for (auto& b : beams)
@@ -131,7 +131,7 @@ int main()
             accumulator -= physicsTimeStep;
         }
 
-        // --- DRAWING ---
+        // graphics
         BeginDrawing();
         ClearBackground(RAYWHITE);
         DrawText(TextFormat("Calculations: %s", FormatWithDots(totalCalculations).c_str()), 20, 20, 80, DARKGRAY);
@@ -154,7 +154,6 @@ int main()
             }
         }
         
-        //TODO: draw Beams
         EndDrawing();
     }
 
